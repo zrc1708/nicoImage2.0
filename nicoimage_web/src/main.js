@@ -9,7 +9,7 @@ import './assets/css/global.css'
 Vue.config.productionTip = false
 
 // import axios from 'axios'
-axios.defaults.baseURL = 'http://imgapi.jibei66.com'
+axios.defaults.baseURL = 'http://127.0.0.1:8888'
 
 // axios接口调用前的拦截器
 axios.interceptors.request.use(config=>{

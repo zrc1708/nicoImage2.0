@@ -6,6 +6,9 @@ const path = require('path');
 const send = require('koa-send');
 const mime = require('mime-types');
 
+const tinify = require("tinify");
+tinify.key = "HkkzR8kq2LdqpBJpwQkJ0SvXBPrynYHP";
+
 const filerouters = new Router()
 
 const baseurl = 'http://imgapi.jibei66.com'
@@ -31,6 +34,11 @@ filerouters.post('/uploadimage', async (ctx, next) => {
         // 可读流通过管道写入可写流
         reader.pipe(upStream);
     })
+
+    var sourse = tinify.fromFile(path.join(__dirname+'/images')+`/${fileNames[0]}`);//输入文件
+    // console.log(path.join(__dirname+'/images')+`/${fileNames[0]}`)
+    // console.log(fileNames[0].split('.')[0]+'-tiny.'+fileNames[0].split('.')[1])
+    await sourse.toFile(path.join(__dirname+'/images')+`/${fileNames[0].split('.')[0]+'-tiny.'+fileNames[0].split('.')[1]}`); //输出文件
 
     var imageUrl = []
     // 将文件信息写入数据库
